@@ -1,5 +1,5 @@
 import Video from "../models/Video";
-
+import User from "../models/User";
 /*
 console.log("start");
 Video.find({}, (error, videos) => {
@@ -23,7 +23,9 @@ export const home = async(req, res) => {
 export const watch = async (req, res) => {
     const { id } = req.params;
     const video = await Video.findById(id);
-    console.log(video);
+    console.log(video);     //it keeps showing new ObjectId(...) 
+    
+    const owner = await User.findById(video.owner);
     if (!video) {
         return res.render("404", {pageTitle: "Video not found."} ); 
     }
@@ -60,14 +62,18 @@ export const getUpload = (req, res) => {
 };
 
 export const postUpload = async(req, res) => {
-    const file = req.file;
+    const {
+        user: { _id },
+    } = req.session;
+    const {path: fileUrl}= req.file;        // power of ES6
     const {title, description, hashtags} = req.body;
     console.log(req.body);  
     try {
         await Video.create({
             title,
             description,
-            fileUrl: file.path,
+            fileUrl,
+            owner: _id,
             hashtags: Video.formatHashtags(hashtags),
             
         }); 

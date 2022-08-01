@@ -177,7 +177,7 @@ export const postEdit = async (req, res) => {
         file,   
     } = req;
     //console.log(path);
-    console.log(file);
+    //console.log(file);
     const updatedUser = await User.findByIdAndUpdate(_id,{
         avatarUrl: file ? file.path : avatarUrl,    // sometimes we won't change avatar file
         name, 
@@ -249,4 +249,15 @@ export const postChangePassword = async (req, res) => {
     return res.redirect("/users/logout");
 }; 
 
-export const see = (req, res) => res.send("see");
+//getting userid in public
+export const see = async(req, res) => {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if(!user) {
+    }
+    return res.render("users/profile",
+         {pageTitle: `${user.name}의 Profile`, 
+         user,
+    })
+};
+ 
