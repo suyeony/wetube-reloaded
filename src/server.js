@@ -37,6 +37,7 @@ app.use(session({
 //controller
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads"));     //expose files in the folder to users
+app.use("/static", express.static("assets"));   //take assets folder contents and expose them by /static address
 app.use("/", rootRouter); 
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
