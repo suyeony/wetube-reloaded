@@ -13,7 +13,7 @@ console.log("finish");
 export const home = async(req, res) => {
     
     //console.log("start") // 1
-    const videos = await Video.find({}).sort({createdAt: "desc"}); /////wait until we get a result from the db
+    const videos = await Video.find({}).sort({createdAt: "desc"}).populate("owner"); /////wait until we get a result from the db
     //console.log(videos);  2
     //console.log("finish");  3
      return res.render("home", { pageTitle: "Home", videos });
@@ -130,7 +130,7 @@ export const search = async(req, res) => {
             title: {
                 $regex: new RegExp(`${keyword}$`, "i"),     
             },
-        });
+        }).populate("owner");
         console.log(videos);
     }
     return res.render("search", { pageTitle:"Search", videos });
