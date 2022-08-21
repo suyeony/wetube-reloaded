@@ -4,14 +4,16 @@ const path = require("path");
 // resolve creates paths for me
 console.log(path.resolve(__dirname, "assets", "js"));
 module.exports = {
-    entry: "./src/client/js/main.js",   //source file we want to transform 
+    entry: {
+        main: "./src/client/js/main.js",
+        videoPlayer: "./src/client/js/videoPlayer.js"},  //source file we want to transform 
     mode: "development",
     watch: true,
     plugins: [new MiniCssExtractPlugin({
         filename: "css/styles.css",
     })],
     output: {
-        filename: "js/main.js",
+        filename: "js/[name].js",
         path: path.resolve(__dirname, "assets"),
         clean: true,
     },

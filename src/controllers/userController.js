@@ -256,6 +256,7 @@ export const postChangePassword = async (req, res) => {
 export const see = async(req, res) => {
     const { id } = req.params;
     //getting video db in user
+    // double poplulate (for using owner info)
     const user = await User.findById(id).populate({
         path: "videos",
         populate: {
