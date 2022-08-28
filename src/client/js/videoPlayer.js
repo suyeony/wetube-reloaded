@@ -12,6 +12,7 @@ const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 // global variable volumeValue
+
 let volumeValue = 0.5;
 // to control the video volume
 video.volume = volumeValue;
@@ -130,11 +131,21 @@ const screenClickPlay = () => {
     }
 }
 
+const handleEnded = () => {
+    const { id } = videoContainer.dataset
+    // randering same url page 
+    // we don't have to show any errors just fetch
+    fetch(`/api/videos/${id}/view`, {
+        method: "POST", 
+    });
+}
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadeddata", handleLoadedMetadata); 
 video.addEventListener("timeupdate", handleTimeUpdate);
+video.addEventListener("ended", handleEnded);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);

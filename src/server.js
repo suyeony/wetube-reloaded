@@ -9,6 +9,7 @@ import videoRouter from "./routers/videoRouter";
 import req from "express/lib/request";
 import { localsMiddleware } from "./middlewares";
 import { mongo } from "mongoose";
+import apiRouter from "./routers/apiRouter";
 
 
 //broswer requests a page to a server!
@@ -41,7 +42,7 @@ app.use("/static", express.static("assets"));   //take assets folder contents an
 app.use("/", rootRouter); 
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
-
+app.use("/api", apiRouter);
 export default app;
 //middleware use 'next' it is controller
 
