@@ -117,7 +117,17 @@ const handleMouseMove = () => {
 
 const handleMouseLeave = () => {
     controlsTimeout = setTimeout(hideContols, 3000)
-    
+}
+
+const screenClickPlay = () => {
+    //if the video is playing, pause it
+    if (video.paused) {
+        video.play();
+    }
+     //else play the video
+    else {
+        video.pause();
+    }
 }
 
 playBtn.addEventListener("click", handlePlayClick);
@@ -129,3 +139,10 @@ videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
+video.addEventListener("click", handlePlayClick);
+document.addEventListener("keyup", event => {
+    if (event.code === 'Space') {
+        handlePlayClick();
+        console.log("space pressed");
+    }
+})
