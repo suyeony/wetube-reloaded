@@ -6,7 +6,8 @@ console.log(path.resolve(__dirname, "assets", "js"));
 module.exports = {
     entry: {
         main: "./src/client/js/main.js",
-        videoPlayer: "./src/client/js/videoPlayer.js"},  //source file we want to transform 
+        videoPlayer: "./src/client/js/videoPlayer.js",
+        recorder: "./src/client/js/recorder.js"},  //source file we want to transform
     mode: "development",
     watch: true,
     plugins: [new MiniCssExtractPlugin({
